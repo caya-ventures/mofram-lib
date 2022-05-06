@@ -26,4 +26,13 @@ module {
         };
         ys.toArray();
     };
+
+    /// Summarise values in the array. 
+    public func sum<A>(a : [A], initial : A, addFunc : (A, A) -> A) : A {
+        var res = initial;
+        for (val in a.vals() ) {
+            res := addFunc(res, val);
+        };
+        res;
+    };
 }
