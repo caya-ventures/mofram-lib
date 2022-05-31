@@ -39,6 +39,15 @@ module {
         res;
     };
 
+    // Calculate the product of values in an array.
+    public func product<A>(a : [A], initial : A, mulFunc : (A, A) -> A) : A {
+        var res = initial;
+        for (val in a.vals() ) {
+            res := mulFunc(res, val);
+        };
+        res;
+    };
+
     // Split an array into chunks
     public func chunk<T> (array : [T], size : Nat) : [[T]] {
         if (size == 0) {
@@ -185,4 +194,27 @@ module {
 
         return Array.freeze(na);
     };
+
+    // Shift an element off the beginning of array.
+    // Returns a new array without a first element and the first element of the initial array.
+    public func shift<T>(a : [T]) : ([T], T) {
+        let na = Array.tabulate<T>(a.size()-1, func (i : Nat) : T {
+            a[i+1];
+        });
+
+        return (na, a[0]);
+    };
+
+    // Prepend elements of array b to the beginning of array a.
+    public func unshift<T>(a : [T], b : [T]) : [T] {
+        let na = Array.tabulate<T>(a.size() + b.size(), func (i : Nat) : T {
+            if (i < b.size()) {
+                b[i];
+            } else {
+                a[i - b.size()];
+            };
+        });
+
+        return na;
+    };    
 }
