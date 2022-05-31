@@ -2,8 +2,10 @@
 /// ```motoko
 /// import Array "mo:mofram/Array";
 /// ```
-import Prim "mo:⛔";
+import Array "mo:base/Array";
 import Buffer "mo:base/Buffer";
+import Iter "mo:base/Iter";
+import Prim "mo:⛔";
 
 module {
     // Determine whether an array includes a certain value.
