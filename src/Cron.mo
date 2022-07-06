@@ -9,7 +9,7 @@ import Array "mo:base/Array";
 import Debug "mo:base/Debug";
 import Hash "mo:base/Hash";
 import HashMap "mo:base/HashMap";
-import T "./Types";
+import T "./CronTypes";
 
 actor Echo {
  type FunctionType = T.FunctionType;
