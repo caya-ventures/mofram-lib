@@ -288,7 +288,7 @@ module {
             Array.find<Nat>(cronObject.hours, func(x : Nat) { x >= startHour });
         };
 
-        private func findAllowedMinute(startMinute  DateTime.Minute): ?DateTime.Minute {
+        private func findAllowedMinute(startMinute : DateTime.Minute): ?DateTime.Minute {
             Array.find<Nat>(cronObject.minutes, func(x : Nat) { x >= startMinute });
         };
 
