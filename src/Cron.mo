@@ -6,6 +6,7 @@ import Int "mo:base/Int";
 import Iter "mo:base/Iter";
 import List "mo:base/List";
 import Nat "mo:base/Nat";
+import Option "mo:base/Option";
 import Text "mo:base/Text";
 import Time "mo:base/Time";
 
@@ -109,7 +110,7 @@ module {
                 // Find the next day.
                 let startDay = if (isStartMonth) {startDateElements.day} else {1};
                 var day = findAllowedDayInMonth(year, month, Int.abs(startDay));
-                var isStartDay = isStartMonth and day == startDateElements.day;
+                var isStartDay = isStartMonth and Option.get(day, 0) == Int.abs(startDateElements.day);
                 let elements = {
                     hour = startDateElements.hour;
                     minute = startDateElements.min;
@@ -316,6 +317,7 @@ module {
                 case (10) 31;
                 case (11) 30;
                 case (12) 31;
+                case (_) 30;
             };
         };
 
