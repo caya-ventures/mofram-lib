@@ -15,12 +15,6 @@ module {
     public type Timestamp = Int;
     public type TaskList = List.List<Task>; 
     public type ScheduleMap = HashMap.HashMap<Timestamp, TaskList>;
-    public type NextTask = { timestamp: Timestamp;task: Task; var status: Nat };
-    public type Response = {
-        #Executed;
-        #NotExecuted;
-    };
-
     public type CronExpression = Text;
 
     public type Task = {
@@ -32,11 +26,11 @@ module {
         var scheduleMap: ScheduleMap = HashMap.HashMap<Timestamp, TaskList>(1, func (x,y) {x == y}, Int.hash);
         public var cronObject = CronParser.parseCronExpression(task.schedule);
 
-        public func construct() {
+        private func construct() {
             updateHashMap(getNextDate(Time.now()), task);
         };
 
-        public func updateHashMap (index:Timestamp, value:Task) :  () {
+        private func updateHashMap (index:Timestamp, value:Task) :  () {
             var existingList : ?TaskList = scheduleMap.get(index);
             var resList = convertOptionalList(existingList);
             resList := List.push(value, resList);
@@ -55,7 +49,7 @@ module {
             };
         };
 
-        // Iterate tasks in the storage and execute tasks' function.
+        // Iterate tasks in the storage and execute tasks function.
         public func run() {
             for ((timestamp, taskList) in scheduleMap.entries()) {
                 let time = Time.now();
@@ -173,22 +167,6 @@ module {
                 sec = 0;
             }));
         };
-
-        public func testGetDayOfWeek (year : Nat, month : Nat, startDay : Nat) : async DateTime.DayOfWeek {
-            let dateTimeObj = {
-                year = year;
-                month = month;
-                day = startDay;
-                week_day = #Wednesday;
-                hour = 0;
-                min = 0;
-                sec = 0;
-            };
-
-            let tmpTimestamp = DateTime.dateTimeToTimestamp(dateTimeObj);
-            let startWeekday = DateTime.timestampToDateTime(tmpTimestamp).week_day;
-        };
-
 
         // Find the next day in the month starting from the startDay that matches either the day or the weekday constraint.
         private func findAllowedDayInMonth(year : Nat, month : Nat, startDay : Nat): ?Nat {
