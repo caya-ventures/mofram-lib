@@ -65,7 +65,7 @@ module {
             };
         };
 
-        // Gets the next date starting from the given start date or now.
+        // Gets the next date starting from the given start date.
         public func getNextDate(time: Time.Time): Timestamp {
             let startDateElements : DateTime.DateTime = DateTime.timestampToDateTime(time); 
             var minYear : DateTime.Year = startDateElements.year;
