@@ -1,5 +1,6 @@
 # Mofram library
 Contains a set of libs to work with Cron, Date and Time and Array.
+Documentation - https://mofram.xyz/
 
 ## Cron
 
