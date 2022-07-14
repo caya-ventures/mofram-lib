@@ -90,7 +90,7 @@ module {
         };    
     };
 
-    public func parseElement(element: Text, limit: Limit): Buffer.Buffer<Nat> {
+    private func parseElement(element: Text, limit: Limit): Buffer.Buffer<Nat> {
         var result = Buffer.Buffer<Nat>(1);
         if (element == "*") {
             for (i in Iter.range(limit.min, limit.max)) {
